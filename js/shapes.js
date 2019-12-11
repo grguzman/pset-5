@@ -56,7 +56,18 @@ const drawRectangle = function() {
   const canvas = document.getElementById('student-canvas-1');
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
+
+  var width = 0;
+  var length = 0;
+  var x = 0;
+  var y = 0;
+
+  do(
+    var width
+    var length
+    while
+  )
+
 
 };
 
