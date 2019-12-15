@@ -99,7 +99,9 @@ const sayHello = function() {
      ctx.stroke();
    }
  };
-
+ /*
+  * Exercise 3.
+  */
  const drawColoredRectangle = function() {
    const canvas = document.getElementById('student-canvas-3');
    const ctx = canvas.getContext('2d');
@@ -122,29 +124,51 @@ const sayHello = function() {
      ctx.fillRect(10, 10, 100, 50);
    }
  };
- 
- const drawColoredRectangle = function() {
-   const canvas = document.getElementById('student-canvas-3');
-   const ctx = canvas.getContext('2d');
-   ctx.clearRect(0, 0, canvas.width, canvas.height);
+ /*
+  * Exercise 4.
+  */
+  const drawTriangle = function() {
+    const canvas = document.getElementById('student-canvas-4');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-   do {
-     var color = (prompt("Color: "))
-     if (color == null) {
-       break;
-     }
-     color = String(color)
-     var color_formatted = color.toUpperCase()
-     if (color_formatted != "GREEN" && color_formatted != "BLACK" && color_formatted != "BLUE" && color_formatted != "ORANGE" && color_formatted != "PURPLE" && color_formatted != "RED" && color_formatted != "YELLOW") {
-       alert(color + " is not a supported color.")
-     }
-   } while (color_formatted != "GREEN" && color_formatted != "BLACK" && color_formatted != "BLUE" && color_formatted != "ORANGE" && color_formatted != "PURPLE" && color_formatted != "RED" && color_formatted != "YELLOW")
+    do {
+      var so = prompt("Side 1: ")
+      var st = prompt("Side 2: ")
+      var sth = prompt("Side 3: ")
 
-   if (color != null) {
-     ctx.fillStyle = color_formatted;
-     ctx.fillRect(10, 10, 100, 50);
-   }
- };
+      var h = Math.min (so, st, sth)
+      var hypo = Math.max(so, st, sth)
+      var base = Math.sqrt(hypo*hypo - h*h)
+
+      if (base == 0 && h == 0 && hypo == 0) {
+        break;
+      }
+      so = Number(so)
+      st = Number(st)
+      sth = Number(sth)
+      if (base*base + h*h != hypo*hypo || base == 0 || h == 0 || hypo == 0  || so+st+sth-hypo-h != base) {
+        alert("That's not a valid right triangle.")
+      }
+      if (isNaN(so) || isNaN(st) || isNaN(sth)) {
+        alert("One of your sides is not a number.")
+      }
+      if (base > 1024 || h > 512 || hypo > 1310720) {
+        alert("Your triangle won't fit on the canvas.")
+      }
+    }  while ((Math.floor(base)*Math.floor(base) + h*h != hypo*hypo) || isNaN(so) || isNaN(st) || isNaN(sth) || base > 1024 || h > 512 || hypo > 1310720 || base == 0 || h == 0 || hypo == 0)
+
+    if ((base*base + h*h == hypo*hypo) && (base < 1024 && h < 512 && hypo < 1145) && (base != 0 && h != 0 && hypo != 0) && (base != null && h != null && hypo != null)) {
+      h = h + 25
+      base = base + 25
+      ctx.beginPath();
+      ctx.moveTo(25, 25);
+      ctx.lineTo(25, h);
+      ctx.lineTo(base, h)
+      ctx.lineTo(25, 25)
+      ctx.stroke();
+    };
+  }
 
 /*
  * Exercise 5.
@@ -229,7 +253,7 @@ const sayHello = function() {
 
    for (i = 5; i > 0; i--) {
      c = i
-     while(counter >= 1) {
+     while(c >= 1) {
        ctx.beginPath();
        ctx.rect(10 + Number(d), (502 - s) - Number(hone), Number(s), Number(s));
        ctx.stroke();
